@@ -1,0 +1,990 @@
+{
+  "description": "Campus Customs agent team audit trail. One entry per run, oldest first. Each run lists every agent-loop step in order.",
+  "total_runs": 6,
+  "runs": [
+    {
+      "run_id": "run-2741a92b",
+      "model": "gpt-6-luna",
+      "started_at": "2026-10-03T23:18:39.791615+00:00",
+      "updated_at": "2026-10-03T23:18:41.079479+00:00",
+      "database": "data/campus_customs_new.db",
+      "tool_source": "MCP server 'campus-customs' via .mcp.json",
+      "note": "Every shop fact in this run came from the MCP server. No agent has a tool that writes to the database or sends a payment.",
+      "total_steps": 1,
+      "agents_used": [
+        "boss"
+      ],
+      "tickets_handled": [],
+      "total_input_tokens": 0,
+      "total_output_tokens": 0,
+      "steps_awaiting_human_approval": 0,
+      "errors": [],
+      "steps": [
+        {
+          "step": 1,
+          "run_id": "run-2741a92b",
+          "timestamp": "2026-10-03T23:18:41.079467+00:00",
+          "agent": "boss",
+          "ticket_id": null,
+          "action": "load_tickets",
+          "model": "gpt-6-luna",
+          "prompt_summary": null,
+          "tools_called": [
+            "list_open_tickets"
+          ],
+          "tool_results_summary": [],
+          "output_summary": "3 open tickets: [101, 102, 103]",
+          "needs_human_approval": false,
+          "input_tokens": null,
+          "output_tokens": null,
+          "duration_seconds": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "run_id": "run-bff4c0d6",
+      "model": "qwen2.5:7b",
+      "started_at": "2026-10-04T00:28:17.544104+00:00",
+      "updated_at": "2026-10-04T00:35:28.573017+00:00",
+      "database": "data/campus_customs_new.db",
+      "tool_source": "MCP server 'campus-customs' via .mcp.json",
+      "note": "Every shop fact in this run came from the MCP server. No agent has a tool that writes to the database or sends a payment.",
+      "total_steps": 9,
+      "agents_used": [
+        "accounting",
+        "boss",
+        "customer_service",
+        "facilities",
+        "inventory"
+      ],
+      "tickets_handled": [
+        101,
+        102
+      ],
+      "total_input_tokens": 32102,
+      "total_output_tokens": 1308,
+      "steps_awaiting_human_approval": 3,
+      "errors": [
+        "UsageLimitExceeded: The next request would exceed the request_limit of 6. Consider raising the limit, or see the docs on usage limits for budget-aware patterns: https://pydantic.dev/docs/ai/core-concepts/agent/#usage-limits",
+        "UnexpectedModelBehavior: Exceeded maximum output retries (2)"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "run_id": "run-bff4c0d6",
+          "timestamp": "2026-10-04T00:28:19.053185+00:00",
+          "agent": "boss",
+          "ticket_id": null,
+          "action": "load_tickets",
+          "model": "qwen2.5:7b",
+          "prompt_summary": null,
+          "tools_called": [
+            "list_open_tickets"
+          ],
+          "tool_results_summary": [],
+          "output_summary": "3 open tickets: [101, 102, 103]",
+          "needs_human_approval": false,
+          "input_tokens": null,
+          "output_tokens": null,
+          "duration_seconds": null,
+          "error": null
+        },
+        {
+          "step": 2,
+          "run_id": "run-bff4c0d6",
+          "timestamp": "2026-10-04T00:28:37.212687+00:00",
+          "agent": "boss",
+          "ticket_id": 101,
+          "action": "route_ticket",
+          "model": "qwen2.5:7b",
+          "prompt_summary": "Ticket 101 is open. Type: customer_order. Requester: Tauhid Zaman. Subject: Bulldog tee. Notes: Needs a tee in size S.. Decide which specialists should look at this and why.",
+          "tools_called": [
+            "final_result({\"ticket_id\":101,\"ticket_type\":\"customer_order\",\"route_to\":[\"inventory\",\"customer_service\"],\"reason\":\"Inventory needs to...)"
+          ],
+          "tool_results_summary": [
+            "final_result -> Final result processed."
+          ],
+          "output_summary": "{\"ticket_id\": 101, \"ticket_type\": \"customer_order\", \"route_to\": [\"inventory\", \"customer_service\"], \"reason\": \"Inventory needs to check stock levels, while Customer Service will handle the communication with the requester.\"}",
+          "needs_human_approval": false,
+          "input_tokens": 1318,
+          "output_tokens": 65,
+          "duration_seconds": 18.16,
+          "error": null
+        },
+        {
+          "step": 3,
+          "run_id": "run-bff4c0d6",
+          "timestamp": "2026-10-04T00:29:17.402724+00:00",
+          "agent": "inventory",
+          "ticket_id": 101,
+          "action": "specialist_report",
+          "model": "qwen2.5:7b",
+          "prompt_summary": "Ticket 101. Type: customer_order. Requester: Tauhid Zaman. Subject: Bulldog tee. Notes: Needs a tee in size S.. sku=CC-TEE-WHITE size=S qty=1 lease_id=None invoice_id=501. Look up what you need with your tools and report on your part of this.",
+          "tools_called": [],
+          "tool_results_summary": [],
+          "output_summary": null,
+          "needs_human_approval": false,
+          "input_tokens": null,
+          "output_tokens": null,
+          "duration_seconds": 40.19,
+          "error": "UsageLimitExceeded: The next request would exceed the request_limit of 6. Consider raising the limit, or see the docs on usage limits for budget-aware patterns: https://pydantic.dev/docs/ai/core-concepts/agent/#usage-limits"
+        },
+        {
+          "step": 4,
+          "run_id": "run-bff4c0d6",
+          "timestamp": "2026-10-04T00:30:33.866731+00:00",
+          "agent": "inventory",
+          "ticket_id": 101,
+          "action": "delegated_by_customer_service",
+          "model": "qwen2.5:7b",
+          "prompt_summary": "customer_service is asking you about ticket 101: When can we expect the next shipment of CC-TEE-WHITE S? Look up what you need with your own tools and answer for your part only.",
+          "tools_called": [
+            "campus-customs_get_ticket_detail({\"ticket_id\":101})",
+            "campus-customs_check_stock({\"sku\":\"CC-TEE-WHITE\",\"size\":\"S\"})",
+            "campus-customs_get_vendor_lead_time({\"vendor_id\":1})",
+            "campus-customs_get_invoice_status({\"invoice_id\":501})",
+            "final_result({\"summary\":\"The shop has no CC-TEE-WHITE S in stock, but we have other sizes available.\",\"recommendation\":\"Place an orde...)"
+          ],
+          "tool_results_summary": [
+            "campus-customs_get_ticket_detail -> {'found': True, 'id': 101, 'type': 'customer_order', 'requester': 'Tauhid Zaman', 'subject': 'Bulldog tee', 'sku': 'CC-TEE-WHITE', 'size': 'S', 'qty': 1, 'lease_id': None, 'invoice_id': 501, 'status': 'open', 'notes': 'Needs a tee in size S.', 'created_at': '2...",
+            "campus-customs_check_stock -> {'found': True, 'sku': 'CC-TEE-WHITE', 'name': 'Classic Bulldog Tee', 'size': 'S', 'qty': 0, 'location': 'Aisle B', 'in_stock': False, 'other_sizes': [{'size': 'M', 'qty': 5, 'location': 'Aisle B'}, {'size': 'L', 'qty': 3, 'location': 'Aisle B'}, {'size': 'XL'...",
+            "campus-customs_get_vendor_lead_time -> {'found': True, 'as_of': '2026-08-31', 'id': 1, 'name': 'Bulldog Print Co', 'specialty': 'apparel reprint', 'lead_days': 5}",
+            "campus-customs_get_invoice_status -> {'found': True, 'id': 501, 'vendor_id': 1, 'amount': 840.0, 'due_date': '2026-08-28', 'status': 'open', 'description': 'Rush reprint CC-TEE-WHITE S', 'vendor_name': 'Bulldog Print Co', 'vendor_lead_days': 5, 'as_of': '2026-08-31', 'is_paid': False, 'days_until...",
+            "final_result -> Final result processed."
+          ],
+          "output_summary": "{\"agent\": \"inventory\", \"ticket_id\": null, \"summary\": \"The shop has no CC-TEE-WHITE S in stock, but we have other sizes available.\", \"facts\": [{\"field\": \"Stock of CC-TEE-WHITE size S\", \"value\": \"0\", \"source_tool\": \"check_stock\"}, {\"field\": \"Other sizes available\", \"value\": \"M (5), L (3), XL (2)\", \"source_tool\": \"check_stock\"}, {\"field\": \"Lead time for reprint\", \"value\": \"5 days\", \"source_tool\": \"get_vendor_lead_time\"}, {\"field\": \"Status of invoice 501\", \"value\": \"Open, $840, due 28 Aug 2026, overdue by 3 days\", \"source_tool\": \"get_invoice_status\"}], \"recommendation\": \"Place an order with Bulldo...",
+          "needs_human_approval": true,
+          "input_tokens": 11608,
+          "output_tokens": 371,
+          "duration_seconds": 53.01,
+          "error": null
+        },
+        {
+          "step": 5,
+          "run_id": "run-bff4c0d6",
+          "timestamp": "2026-10-04T00:31:13.843791+00:00",
+          "agent": "customer_service",
+          "ticket_id": 101,
+          "action": "specialist_report",
+          "model": "qwen2.5:7b",
+          "prompt_summary": "Ticket 101. Type: customer_order. Requester: Tauhid Zaman. Subject: Bulldog tee. Notes: Needs a tee in size S.. sku=CC-TEE-WHITE size=S qty=1 lease_id=None invoice_id=501. Look up what you need with your tools and report on your part of this.",
+          "tools_called": [
+            "campus-customs_get_ticket_detail({\"ticket_id\":101})",
+            "campus-customs_check_stock({\"sku\":\"CC-TEE-WHITE\",\"size\":\"S\"})",
+            "campus-customs_get_invoice_status({\"invoice_id\":501})",
+            "ask_colleague({\"colleague\":\"inventory\",\"question\":\"When can we expect the next shipment of CC-TEE-WHITE S?\"})",
+            "final_result({\"needs_human_approval\":true,\"risk\":\"low\",\"confident\":false,\"agent\":\"customer_service\",\"summary\":\"There are no CC-TEE-WH...)"
+          ],
+          "tool_results_summary": [
+            "campus-customs_get_ticket_detail -> {'found': True, 'id': 101, 'type': 'customer_order', 'requester': 'Tauhid Zaman', 'subject': 'Bulldog tee', 'sku': 'CC-TEE-WHITE', 'size': 'S', 'qty': 1, 'lease_id': None, 'invoice_id': 501, 'status': 'open', 'notes': 'Needs a tee in size S.', 'created_at': '2...",
+            "campus-customs_check_stock -> {'found': True, 'sku': 'CC-TEE-WHITE', 'name': 'Classic Bulldog Tee', 'size': 'S', 'qty': 0, 'location': 'Aisle B', 'in_stock': False, 'other_sizes': [{'size': 'M', 'qty': 5, 'location': 'Aisle B'}, {'size': 'L', 'qty': 3, 'location': 'Aisle B'}, {'size': 'XL'...",
+            "campus-customs_get_invoice_status -> {'found': True, 'id': 501, 'vendor_id': 1, 'amount': 840.0, 'due_date': '2026-08-28', 'status': 'open', 'description': 'Rush reprint CC-TEE-WHITE S', 'vendor_name': 'Bulldog Print Co', 'vendor_lead_days': 5, 'as_of': '2026-08-31', 'is_paid': False, 'days_until...",
+            "ask_colleague -> Answer from inventory: {\"agent\": \"inventory\", \"ticket_id\": null, \"summary\": \"The shop has no CC-TEE-WHITE S in stock, but we have other sizes available.\", \"facts\": [{\"field\": \"Stock of CC-TEE-WHITE size S\", \"value\": \"0\", \"source_tool\": \"check_stock\"}, {\"field\"...",
+            "final_result -> Final result processed."
+          ],
+          "output_summary": "{\"agent\": \"customer_service\", \"ticket_id\": null, \"summary\": \"There are no CC-TEE-WHITE S in stock, but we have other sizes available (M, L, XL). The shop is working on a reprint, but it depends on the overdue invoice 501 being paid first.\", \"facts\": [{\"field\": \"Stock of CC-TEE-WHITE size S\", \"value\": \"0\", \"source_tool\": \"check_stock\"}, {\"field\": \"Other sizes available\", \"value\": \"M (5), L (3), XL (2)\", \"source_tool\": \"check_stock\"}, {\"field\": \"Lead time for reprint\", \"value\": \"5 days\", \"source_tool\": \"get_vendor_lead_time\"}, {\"field\": \"Status of invoice 501\", \"value\": \"Open, $840, due 28 Aug 2...",
+          "needs_human_approval": true,
+          "input_tokens": 12073,
+          "output_tokens": 408,
+          "duration_seconds": 116.43,
+          "error": null
+        },
+        {
+          "step": 6,
+          "run_id": "run-bff4c0d6",
+          "timestamp": "2026-10-04T00:31:40.887242+00:00",
+          "agent": "boss",
+          "ticket_id": 101,
+          "action": "final_decision",
+          "model": "qwen2.5:7b",
+          "prompt_summary": "Ticket 101 (customer_order): Bulldog tee. Notes: Needs a tee in size S.. Your specialists reported: [customer_service] summary: There are no CC-TEE-WHITE S in stock, but we have other sizes available (M, L, XL). The shop is working on a reprint, but it depends on the overdue invoice 501 being paid first. recommendation: Thank you for your patience, we will confirm the expected arrival date once th...",
+          "tools_called": [
+            "final_result({\"ticket_id\":101,\"decision\":\"We will not ship the order until the invoice 501 is paid, as it's blocking the reprint of s...)"
+          ],
+          "tool_results_summary": [
+            "final_result -> Final result processed."
+          ],
+          "output_summary": "{\"ticket_id\": 101, \"decision\": \"We will not ship the order until the invoice 501 is paid, as it's blocking the reprint of size S tees.\", \"rationale\": \"The team reported that the reprint of size S tees depends on invoice 501 being paid, which is currently overdue. Until this invoice is settled, the shop cannot proceed with the order.\", \"human_approval_required\": true, \"approval_reason\": null, \"open_questions\": []}",
+          "needs_human_approval": true,
+          "input_tokens": 1622,
+          "output_tokens": 113,
+          "duration_seconds": 27.04,
+          "error": null
+        },
+        {
+          "step": 7,
+          "run_id": "run-bff4c0d6",
+          "timestamp": "2026-10-04T00:31:57.451652+00:00",
+          "agent": "boss",
+          "ticket_id": 102,
+          "action": "route_ticket",
+          "model": "qwen2.5:7b",
+          "prompt_summary": "Ticket 102 is open. Type: rent_notice. Requester: Elm City Properties. Subject: Rent due. Notes: Email: shop rent due in 2 days.. Decide which specialists should look at this and why.",
+          "tools_called": [
+            "final_result({\"ticket_id\":102,\"ticket_type\":\"rent_notice\",\"route_to\":[\"facilities\",\"inventory\"],\"reason\":\"Facilities will confirm the...)"
+          ],
+          "tool_results_summary": [
+            "final_result -> Final result processed."
+          ],
+          "output_summary": "{\"ticket_id\": 102, \"ticket_type\": \"rent_notice\", \"route_to\": [\"facilities\", \"inventory\"], \"reason\": \"Facilities will confirm the lease terms and payment status. Inventory will check if any assets are associated with this lease.\"}",
+          "needs_human_approval": false,
+          "input_tokens": 1319,
+          "output_tokens": 70,
+          "duration_seconds": 16.56,
+          "error": null
+        },
+        {
+          "step": 8,
+          "run_id": "run-bff4c0d6",
+          "timestamp": "2026-10-04T00:35:28.543805+00:00",
+          "agent": "accounting",
+          "ticket_id": 102,
+          "action": "delegated_by_facilities",
+          "model": "qwen2.5:7b",
+          "prompt_summary": "facilities is asking you about ticket 102: Do we have any open invoices or competing obligations that might affect the balance in the checking account? Look up what you need with your own tools and answer for your part only.",
+          "tools_called": [],
+          "tool_results_summary": [],
+          "output_summary": null,
+          "needs_human_approval": false,
+          "input_tokens": null,
+          "output_tokens": null,
+          "duration_seconds": 140.35,
+          "error": "UnexpectedModelBehavior: Exceeded maximum output retries (2)"
+        },
+        {
+          "step": 9,
+          "run_id": "run-bff4c0d6",
+          "timestamp": "2026-10-04T00:35:28.572993+00:00",
+          "agent": "facilities",
+          "ticket_id": 102,
+          "action": "specialist_report",
+          "model": "qwen2.5:7b",
+          "prompt_summary": "Ticket 102. Type: rent_notice. Requester: Elm City Properties. Subject: Rent due. Notes: Email: shop rent due in 2 days.. sku=None size=None qty=None lease_id=1 invoice_id=None. Look up what you need with your tools and report on your part of this.",
+          "tools_called": [
+            "campus-customs_get_shop_date({})",
+            "campus-customs_check_rent_status({\"lease_id\":1})",
+            "campus-customs_get_cash_balance({\"account\":\"checking\"})",
+            "final_result({\"recommendation\":\"No action needed at this time. The balance is sufficient to cover the upcoming rent without any issue...)",
+            "campus-customs_list_open_invoices({})",
+            "ask_colleague({\"question\":\"Do we have any open invoices or competing obligations that might affect the balance in the checking account...)"
+          ],
+          "tool_results_summary": [
+            "campus-customs_get_shop_date -> {'found': True, 'date_today': '2026-08-31'}",
+            "campus-customs_check_rent_status -> {'found': True, 'lease_id': 1, 'space_name': 'Chapel Street shop', 'landlord': 'Elm City Properties', 'monthly_rent': 2400.0, 'next_due': '2026-09-02', 'as_of': '2026-08-31', 'days_until_due': 2, 'is_overdue': False, 'account': 'checking', 'balance': 3400.0, '...",
+            "campus-customs_get_cash_balance -> {'found': True, 'name': 'checking', 'balance': 3400.0, 'date': '2026-08-31'}",
+            "final_result -> Final result processed.",
+            "campus-customs_list_open_invoices -> {'found': True, 'as_of': '2026-08-31', 'count': 1, 'total_owed': 840.0, 'invoices': [{'id': 501, 'vendor_id': 1, 'amount': 840.0, 'due_date': '2026-08-28', 'status': 'open', 'description': 'Rush reprint CC-TEE-WHITE S', 'days_until_due': -3, 'is_overdue': True...",
+            "ask_colleague -> accounting could not answer (UnexpectedModelBehavior). Treat this as unknown."
+          ],
+          "output_summary": "{\"agent\": \"facilities\", \"ticket_id\": null, \"summary\": \"Chapel Street shop rent is due on 2026-09-02, 2 days from the shop date. The lease amount is $2400.00, and the balance in the checking account is $3400.00, which covers the rent with $1000.00 left over.\", \"facts\": [], \"recommendation\": \"No action needed at this time. The balance is sufficient to cover the upcoming rent without any issues.\", \"blockers\": [], \"needs_human_approval\": false, \"risk\": \"none\", \"confident\": true}",
+          "needs_human_approval": false,
+          "input_tokens": 4162,
+          "output_tokens": 281,
+          "duration_seconds": 211.12,
+          "error": null
+        }
+      ]
+    },
+    {
+      "run_id": "run-85ab659f",
+      "model": "gpt-6-luna",
+      "started_at": "2026-10-04T03:12:57.510321+00:00",
+      "updated_at": "2026-10-04T03:12:59.418124+00:00",
+      "database": "data/campus_customs_new.db",
+      "tool_source": "MCP server 'campus-customs' via .mcp.json",
+      "note": "Every shop fact in this run came from the MCP server. No agent has a tool that writes to the database or sends a payment.",
+      "total_steps": 1,
+      "agents_used": [
+        "boss"
+      ],
+      "tickets_handled": [
+        101
+      ],
+      "total_input_tokens": 0,
+      "total_output_tokens": 0,
+      "steps_awaiting_human_approval": 0,
+      "errors": [
+        "ModelHTTPError: status_code: 400, model_name: gpt-6-luna, body: {'message': \"Function tools with reasoning_effort are not supported for gpt-6-luna in /v1/chat/completions. To use function tools, use /v1/responses or set reasoning_effort to 'none'.\", 'type': 'invalid_request_error', 'param': 'reasoning_effort', 'code': None}"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "run_id": "run-85ab659f",
+          "timestamp": "2026-10-04T03:12:59.418069+00:00",
+          "agent": "boss",
+          "ticket_id": 101,
+          "action": "route_ticket",
+          "model": "gpt-6-luna",
+          "prompt_summary": "Ticket 101 is open. Type: customer_order. Requester: Tauhid Zaman. Subject: Bulldog tee. Notes: Needs a tee in size S.. Decide which specialists should look at this and why.",
+          "tools_called": [],
+          "tool_results_summary": [],
+          "output_summary": null,
+          "needs_human_approval": false,
+          "input_tokens": null,
+          "output_tokens": null,
+          "duration_seconds": 1.48,
+          "error": "ModelHTTPError: status_code: 400, model_name: gpt-6-luna, body: {'message': \"Function tools with reasoning_effort are not supported for gpt-6-luna in /v1/chat/completions. To use function tools, use /v1/responses or set reasoning_effort to 'none'.\", 'type': 'invalid_request_error', 'param': 'reasoning_effort', 'code': None}"
+        }
+      ]
+    },
+    {
+      "run_id": "run-bddd17ca",
+      "model": "gpt-6-luna",
+      "started_at": "2026-10-04T03:16:41.342076+00:00",
+      "updated_at": "2026-10-04T03:17:27.075814+00:00",
+      "database": "data/campus_customs_new.db",
+      "tool_source": "MCP server 'campus-customs' via .mcp.json",
+      "note": "Every shop fact in this run came from the MCP server. No agent has a tool that writes to the database or sends a payment.",
+      "total_steps": 6,
+      "agents_used": [
+        "accounting",
+        "boss",
+        "customer_service",
+        "inventory"
+      ],
+      "tickets_handled": [
+        101
+      ],
+      "total_input_tokens": 23318,
+      "total_output_tokens": 2845,
+      "steps_awaiting_human_approval": 4,
+      "errors": [],
+      "steps": [
+        {
+          "step": 1,
+          "run_id": "run-bddd17ca",
+          "timestamp": "2026-10-04T03:16:48.697431+00:00",
+          "agent": "boss",
+          "ticket_id": 101,
+          "action": "route_ticket",
+          "model": "gpt-6-luna",
+          "prompt_summary": "Ticket 101 is open. Type: customer_order. Requester: Tauhid Zaman. Subject: Bulldog tee. Notes: Needs a tee in size S.. Decide which specialists should look at this and why.",
+          "tools_called": [
+            "campus-customs_get_shop_date({})",
+            "campus-customs_get_ticket_detail({\"ticket_id\":101})",
+            "final_result({\"ticket_id\":101,\"ticket_type\":\"customer_order\",\"route_to\":[\"inventory\",\"accounting\",\"customer_service\"],\"reason\":\"Inven...)"
+          ],
+          "tool_results_summary": [
+            "campus-customs_get_shop_date -> {'found': True, 'date_today': '2026-08-31'}",
+            "campus-customs_get_ticket_detail -> {'found': True, 'id': 101, 'type': 'customer_order', 'requester': 'Tauhid Zaman', 'subject': 'Bulldog tee', 'sku': 'CC-TEE-WHITE', 'size': 'S', 'qty': 1, 'lease_id': None, 'invoice_id': 501, 'status': 'open', 'notes': 'Needs a tee in size S.', 'created_at': '2...",
+            "final_result -> Final result processed."
+          ],
+          "output_summary": "{\"ticket_id\": 101, \"ticket_type\": \"customer_order\", \"route_to\": [\"inventory\", \"accounting\", \"customer_service\"], \"reason\": \"Inventory should check availability of one CC-TEE-WHITE in size S, and Accounting should review linked invoice 501 because the order may depend on a reprint. Customer Service should determine what can be communicated to Tauhid without promising fulfillment or a ship date prematurely.\"}",
+          "needs_human_approval": false,
+          "input_tokens": 4053,
+          "output_tokens": 250,
+          "duration_seconds": 6.92,
+          "error": null
+        },
+        {
+          "step": 2,
+          "run_id": "run-bddd17ca",
+          "timestamp": "2026-10-04T03:16:57.916256+00:00",
+          "agent": "inventory",
+          "ticket_id": 101,
+          "action": "specialist_report",
+          "model": "gpt-6-luna",
+          "prompt_summary": "Ticket 101. Type: customer_order. Requester: Tauhid Zaman. Subject: Bulldog tee. Notes: Needs a tee in size S.. sku=CC-TEE-WHITE size=S qty=1 lease_id=None invoice_id=501. Look up what you need with your tools and report on your part of this.",
+          "tools_called": [
+            "campus-customs_check_stock({\"sku\":\"CC-TEE-WHITE\",\"size\":\"S\"})",
+            "campus-customs_get_ticket_detail({\"ticket_id\":101})",
+            "campus-customs_get_invoice_status({\"invoice_id\":501})",
+            "campus-customs_get_shop_date({})",
+            "campus-customs_get_vendor_lead_time({\"vendor_id\":1})",
+            "campus-customs_get_invoice_status({\"invoice_id\":501})",
+            "final_result({\"agent\":\"inventory\",\"ticket_id\":101,\"summary\":\"There are 0 units of CC-TEE-WHITE in size S, so the requested unit is sh...)"
+          ],
+          "tool_results_summary": [
+            "campus-customs_check_stock -> {'found': True, 'sku': 'CC-TEE-WHITE', 'name': 'Classic Bulldog Tee', 'size': 'S', 'qty': 0, 'location': 'Aisle B', 'in_stock': False, 'other_sizes': [{'size': 'M', 'qty': 5, 'location': 'Aisle B'}, {'size': 'L', 'qty': 3, 'location': 'Aisle B'}, {'size': 'XL'...",
+            "campus-customs_get_ticket_detail -> {'found': True, 'id': 101, 'type': 'customer_order', 'requester': 'Tauhid Zaman', 'subject': 'Bulldog tee', 'sku': 'CC-TEE-WHITE', 'size': 'S', 'qty': 1, 'lease_id': None, 'invoice_id': 501, 'status': 'open', 'notes': 'Needs a tee in size S.', 'created_at': '2...",
+            "campus-customs_get_invoice_status -> {'found': True, 'id': 501, 'vendor_id': 1, 'amount': 840.0, 'due_date': '2026-08-28', 'status': 'open', 'description': 'Rush reprint CC-TEE-WHITE S', 'vendor_name': 'Bulldog Print Co', 'vendor_lead_days': 5, 'as_of': '2026-08-31', 'is_paid': False, 'days_until...",
+            "campus-customs_get_shop_date -> {'found': True, 'date_today': '2026-08-31'}",
+            "campus-customs_get_vendor_lead_time -> {'found': True, 'as_of': '2026-08-31', 'id': 1, 'name': 'Bulldog Print Co', 'specialty': 'apparel reprint', 'lead_days': 5}",
+            "campus-customs_get_invoice_status -> {'found': True, 'id': 501, 'vendor_id': 1, 'amount': 840.0, 'due_date': '2026-08-28', 'status': 'open', 'description': 'Rush reprint CC-TEE-WHITE S', 'vendor_name': 'Bulldog Print Co', 'vendor_lead_days': 5, 'as_of': '2026-08-31', 'is_paid': False, 'days_until...",
+            "final_result -> Final result processed."
+          ],
+          "output_summary": "{\"agent\": \"inventory\", \"ticket_id\": 101, \"summary\": \"There are 0 units of CC-TEE-WHITE in size S, so the requested unit is short by 1. Invoice 501 for the size-S rush reprint is open and overdue; although Bulldog Print Co\\u2019s lead time is 5 days, the stock cannot be treated as incoming or assigned an arrival date until the invoice is paid.\", \"facts\": [{\"field\": \"CC-TEE-WHITE size S stock\", \"value\": \"0\", \"source_tool\": \"campus-customs_check_stock\"}, {\"field\": \"Other sizes on hand\", \"value\": \"M: 5; L: 3; XL: 2\", \"source_tool\": \"campus-customs_check_stock\"}, {\"field\": \"Ticket requested quantit...",
+          "needs_human_approval": true,
+          "input_tokens": 6645,
+          "output_tokens": 664,
+          "duration_seconds": 9.22,
+          "error": null
+        },
+        {
+          "step": 3,
+          "run_id": "run-bddd17ca",
+          "timestamp": "2026-10-04T03:17:06.165745+00:00",
+          "agent": "accounting",
+          "ticket_id": 101,
+          "action": "specialist_report",
+          "model": "gpt-6-luna",
+          "prompt_summary": "Ticket 101. Type: customer_order. Requester: Tauhid Zaman. Subject: Bulldog tee. Notes: Needs a tee in size S.. sku=CC-TEE-WHITE size=S qty=1 lease_id=None invoice_id=501. Look up what you need with your tools and report on your part of this.",
+          "tools_called": [
+            "campus-customs_get_shop_date({})",
+            "campus-customs_get_invoice_status({\"invoice_id\":501})",
+            "final_result({\"agent\":\"accounting\",\"ticket_id\":101,\"summary\":\"Invoice 501 is for the rush reprint of CC-TEE-WHITE size S. It remains ...)"
+          ],
+          "tool_results_summary": [
+            "campus-customs_get_shop_date -> {'found': True, 'date_today': '2026-08-31'}",
+            "campus-customs_get_invoice_status -> {'found': True, 'id': 501, 'vendor_id': 1, 'amount': 840.0, 'due_date': '2026-08-28', 'status': 'open', 'description': 'Rush reprint CC-TEE-WHITE S', 'vendor_name': 'Bulldog Print Co', 'vendor_lead_days': 5, 'as_of': '2026-08-31', 'is_paid': False, 'days_until...",
+            "final_result -> Final result processed."
+          ],
+          "output_summary": "{\"agent\": \"accounting\", \"ticket_id\": 101, \"summary\": \"Invoice 501 is for the rush reprint of CC-TEE-WHITE size S. It remains unpaid and is 3 days overdue as of the shop date, so this reprint should not be treated as paid-for incoming stock for the customer order.\", \"facts\": [{\"field\": \"Shop date\", \"value\": \"2026-08-31\", \"source_tool\": \"campus-customs_get_shop_date\"}, {\"field\": \"Invoice 501 status\", \"value\": \"open (unpaid); overdue by 3 days; due 2026-08-28\", \"source_tool\": \"campus-customs_get_invoice_status\"}, {\"field\": \"Invoice 501 amount\", \"value\": \"$840.00\", \"source_tool\": \"campus-customs_g...",
+          "needs_human_approval": true,
+          "input_tokens": 4225,
+          "output_tokens": 767,
+          "duration_seconds": 8.25,
+          "error": null
+        },
+        {
+          "step": 4,
+          "run_id": "run-bddd17ca",
+          "timestamp": "2026-10-04T03:17:13.393445+00:00",
+          "agent": "customer_service",
+          "ticket_id": 101,
+          "action": "specialist_report",
+          "model": "gpt-6-luna",
+          "prompt_summary": "Ticket 101. Type: customer_order. Requester: Tauhid Zaman. Subject: Bulldog tee. Notes: Needs a tee in size S.. sku=CC-TEE-WHITE size=S qty=1 lease_id=None invoice_id=501. Look up what you need with your tools and report on your part of this.",
+          "tools_called": [
+            "campus-customs_get_ticket_detail({\"ticket_id\":101})",
+            "campus-customs_get_shop_date({})",
+            "campus-customs_check_stock({\"sku\":\"CC-TEE-WHITE\",\"size\":\"S\"})",
+            "campus-customs_get_invoice_status({\"invoice_id\":501})",
+            "final_result({\"agent\":\"customer_service\",\"ticket_id\":101,\"summary\":\"Size S is out of stock. The reprint invoice for size S is unpaid ...)"
+          ],
+          "tool_results_summary": [
+            "campus-customs_get_ticket_detail -> {'found': True, 'id': 101, 'type': 'customer_order', 'requester': 'Tauhid Zaman', 'subject': 'Bulldog tee', 'sku': 'CC-TEE-WHITE', 'size': 'S', 'qty': 1, 'lease_id': None, 'invoice_id': 501, 'status': 'open', 'notes': 'Needs a tee in size S.', 'created_at': '2...",
+            "campus-customs_get_shop_date -> {'found': True, 'date_today': '2026-08-31'}",
+            "campus-customs_check_stock -> {'found': True, 'sku': 'CC-TEE-WHITE', 'name': 'Classic Bulldog Tee', 'size': 'S', 'qty': 0, 'location': 'Aisle B', 'in_stock': False, 'other_sizes': [{'size': 'M', 'qty': 5, 'location': 'Aisle B'}, {'size': 'L', 'qty': 3, 'location': 'Aisle B'}, {'size': 'XL'...",
+            "campus-customs_get_invoice_status -> {'found': True, 'id': 501, 'vendor_id': 1, 'amount': 840.0, 'due_date': '2026-08-28', 'status': 'open', 'description': 'Rush reprint CC-TEE-WHITE S', 'vendor_name': 'Bulldog Print Co', 'vendor_lead_days': 5, 'as_of': '2026-08-31', 'is_paid': False, 'days_until...",
+            "final_result -> Final result processed."
+          ],
+          "output_summary": "{\"agent\": \"customer_service\", \"ticket_id\": 101, \"summary\": \"Size S is out of stock. The reprint invoice for size S is unpaid and overdue, so there is no confirmed restock timing; sizes M, L, and XL are currently available.\", \"facts\": [{\"field\": \"ticket request\", \"value\": \"Tauhid Zaman requested one CC-TEE-WHITE tee in size S.\", \"source_tool\": \"campus-customs_get_ticket_detail\"}, {\"field\": \"shop date\", \"value\": \"2026-08-31\", \"source_tool\": \"campus-customs_get_shop_date\"}, {\"field\": \"size S inventory\", \"value\": \"0 in stock\", \"source_tool\": \"campus-customs_check_stock\"}, {\"field\": \"other sizes in...",
+          "needs_human_approval": false,
+          "input_tokens": 4132,
+          "output_tokens": 723,
+          "duration_seconds": 7.23,
+          "error": null
+        },
+        {
+          "step": 5,
+          "run_id": "run-bddd17ca",
+          "timestamp": "2026-10-04T03:17:26.393942+00:00",
+          "agent": "boss",
+          "ticket_id": 101,
+          "action": "final_decision",
+          "model": "gpt-6-luna",
+          "prompt_summary": "Ticket 101 (customer_order): Bulldog tee. Notes: Needs a tee in size S.. Your specialists reported: [inventory] summary: There are 0 units of CC-TEE-WHITE in size S, so the requested unit is short by 1. Invoice 501 for the size-S rush reprint is open and overdue; although Bulldog Print Co\u2019s lead time is 5 days, the stock cannot be treated as incoming or assigned an arrival date until the invoice i...",
+          "tools_called": [
+            "campus-customs_get_shop_date({})",
+            "final_result({\"ticket_id\":101,\"decision\":\"Do not promise or ship the Bulldog tee in size S now: stock is 0, and the size-S reprint is...)"
+          ],
+          "tool_results_summary": [
+            "campus-customs_get_shop_date -> {'found': True, 'date_today': '2026-08-31'}",
+            "final_result -> Final result processed."
+          ],
+          "output_summary": "{\"ticket_id\": 101, \"decision\": \"Do not promise or ship the Bulldog tee in size S now: stock is 0, and the size-S reprint is not confirmed while invoice 501 remains unpaid. Ask the owner to approve payment of invoice 501 ($840.00); once paid, confirm with Inventory that the reprint is underway and stock is available before giving a shipment commitment. Tell the customer there is no confirmed restock date, and ask whether size M, L, or XL would work instead.\", \"rationale\": \"As of the shop date, 2026-08-31, invoice 501 is open and 3 days overdue. Bulldog Print Co\\u2019s 5-day lead time cannot be ...",
+          "needs_human_approval": true,
+          "input_tokens": 4263,
+          "output_tokens": 441,
+          "duration_seconds": 13.0,
+          "error": null
+        },
+        {
+          "step": 6,
+          "run_id": "run-bddd17ca",
+          "timestamp": "2026-10-04T03:17:27.075805+00:00",
+          "agent": "boss",
+          "ticket_id": 101,
+          "action": "prepared_payment",
+          "model": "gpt-6-luna",
+          "prompt_summary": null,
+          "tools_called": [],
+          "tool_results_summary": [],
+          "output_summary": "{\"id\": \"apr-c683c3ea\", \"kind\": \"invoice\", \"amount\": 840.0, \"payee\": \"Bulldog Print Co\", \"description\": \"Invoice 501: Rush reprint CC-TEE-WHITE S\"}",
+          "needs_human_approval": true,
+          "input_tokens": null,
+          "output_tokens": null,
+          "duration_seconds": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "run_id": "run-c0f316a0",
+      "model": "gpt-6-luna",
+      "started_at": "2026-10-04T03:18:03.940130+00:00",
+      "updated_at": "2026-10-04T03:18:47.967513+00:00",
+      "database": "data/campus_customs_new.db",
+      "tool_source": "MCP server 'campus-customs' via .mcp.json",
+      "note": "Every shop fact in this run came from the MCP server. No agent has a tool that writes to the database or sends a payment.",
+      "total_steps": 7,
+      "agents_used": [
+        "accounting",
+        "boss",
+        "facilities"
+      ],
+      "tickets_handled": [
+        102
+      ],
+      "total_input_tokens": 25770,
+      "total_output_tokens": 3403,
+      "steps_awaiting_human_approval": 5,
+      "errors": [],
+      "steps": [
+        {
+          "step": 1,
+          "run_id": "run-c0f316a0",
+          "timestamp": "2026-10-04T03:18:09.677626+00:00",
+          "agent": "boss",
+          "ticket_id": 102,
+          "action": "route_ticket",
+          "model": "gpt-6-luna",
+          "prompt_summary": "Ticket 102 is open. Type: rent_notice. Requester: Elm City Properties. Subject: Rent due. Notes: Email: shop rent due in 2 days.. Decide which specialists should look at this and why.",
+          "tools_called": [
+            "campus-customs_get_shop_date({})",
+            "campus-customs_get_ticket_detail({\"ticket_id\":102})",
+            "final_result({\"ticket_id\":102,\"ticket_type\":\"rent_notice\",\"route_to\":[\"facilities\",\"accounting\"],\"reason\":\"Facilities should verify t...)"
+          ],
+          "tool_results_summary": [
+            "campus-customs_get_shop_date -> {'found': True, 'date_today': '2026-08-31'}",
+            "campus-customs_get_ticket_detail -> {'found': True, 'id': 102, 'type': 'rent_notice', 'requester': 'Elm City Properties', 'subject': 'Rent due', 'sku': None, 'size': None, 'qty': None, 'lease_id': 1, 'invoice_id': None, 'status': 'open', 'notes': 'Email: shop rent due in 2 days.', 'created_at': ...",
+            "final_result -> Final result processed."
+          ],
+          "output_summary": "{\"ticket_id\": 102, \"ticket_type\": \"rent_notice\", \"route_to\": [\"facilities\", \"accounting\"], \"reason\": \"Facilities should verify the lease and rent due date; Accounting should check the amount owed and available funds because any rent payment requires the owner's approval. The notice says rent is due in two days from the shop date, August 31, 2026.\"}",
+          "needs_human_approval": false,
+          "input_tokens": 2785,
+          "output_tokens": 440,
+          "duration_seconds": 5.34,
+          "error": null
+        },
+        {
+          "step": 2,
+          "run_id": "run-c0f316a0",
+          "timestamp": "2026-10-04T03:18:24.673931+00:00",
+          "agent": "accounting",
+          "ticket_id": 102,
+          "action": "delegated_by_facilities",
+          "model": "gpt-6-luna",
+          "prompt_summary": "facilities is asking you about ticket 102: For ticket 102, lease 1: what unpaid obligations are currently due from checking, and does anything compete with this rent payment? Look up what you need with your own tools and answer for your part only.",
+          "tools_called": [
+            "campus-customs_list_open_invoices({})",
+            "ask_colleague({\"colleague\":\"facilities\",\"question\":\"For ticket 102, lease 1, what rent amount is currently due from checking and when ...)",
+            "campus-customs_get_cash_balance({\"account\":\"checking\"})",
+            "final_result({\"agent\":\"accounting\",\"ticket_id\":102,\"summary\":\"As of the shop date 2026-08-31, there are no open invoices, so no unpai...)"
+          ],
+          "tool_results_summary": [
+            "campus-customs_list_open_invoices -> {'found': False, 'as_of': '2026-08-31', 'count': 0, 'total_owed': 0, 'invoices': []}",
+            "ask_colleague -> Refused: facilities is already in this chain (facilities -> accounting). Answer with what you have.",
+            "campus-customs_get_cash_balance -> {'found': True, 'name': 'checking', 'balance': 2560.0, 'date': '2026-08-31'}",
+            "final_result -> Final result processed."
+          ],
+          "output_summary": "{\"agent\": \"accounting\", \"ticket_id\": 102, \"summary\": \"As of the shop date 2026-08-31, there are no open invoices, so no unpaid invoice obligations compete with lease 1 rent from checking. Checking balance is $2,560.00; I could not retrieve the rent amount or due date because Facilities is already upstream in this handoff, so I cannot assess total coverage against rent.\", \"facts\": [{\"field\": \"open invoices / total owed\", \"value\": \"0 open invoices; $0.00 owed\", \"source_tool\": \"campus-customs_list_open_invoices\"}, {\"field\": \"checking balance\", \"value\": \"$2,560.00 as of 2026-08-31\", \"source_tool\":...",
+          "needs_human_approval": false,
+          "input_tokens": 6336,
+          "output_tokens": 707,
+          "duration_seconds": 8.85,
+          "error": null
+        },
+        {
+          "step": 3,
+          "run_id": "run-c0f316a0",
+          "timestamp": "2026-10-04T03:18:28.873019+00:00",
+          "agent": "facilities",
+          "ticket_id": 102,
+          "action": "specialist_report",
+          "model": "gpt-6-luna",
+          "prompt_summary": "Ticket 102. Type: rent_notice. Requester: Elm City Properties. Subject: Rent due. Notes: Email: shop rent due in 2 days.. sku=None size=None qty=None lease_id=1 invoice_id=None. Look up what you need with your tools and report on your part of this.",
+          "tools_called": [
+            "campus-customs_get_shop_date({})",
+            "campus-customs_get_ticket_detail({\"ticket_id\":102})",
+            "campus-customs_check_rent_status({\"lease_id\":1,\"account\":\"checking\"})",
+            "ask_colleague({\"colleague\":\"accounting\",\"question\":\"For ticket 102, lease 1: what unpaid obligations are currently due from checking, ...)",
+            "final_result({\"agent\":\"facilities\",\"ticket_id\":102,\"summary\":\"Lease 1 is for the Chapel Street shop, with Elm City Properties as land...)"
+          ],
+          "tool_results_summary": [
+            "campus-customs_get_shop_date -> {'found': True, 'date_today': '2026-08-31'}",
+            "campus-customs_get_ticket_detail -> {'found': True, 'id': 102, 'type': 'rent_notice', 'requester': 'Elm City Properties', 'subject': 'Rent due', 'sku': None, 'size': None, 'qty': None, 'lease_id': 1, 'invoice_id': None, 'status': 'open', 'notes': 'Email: shop rent due in 2 days.', 'created_at': ...",
+            "campus-customs_check_rent_status -> {'found': True, 'lease_id': 1, 'space_name': 'Chapel Street shop', 'landlord': 'Elm City Properties', 'monthly_rent': 2400.0, 'next_due': '2026-09-02', 'as_of': '2026-08-31', 'days_until_due': 2, 'is_overdue': False, 'account': 'checking', 'balance': 2560.0, '...",
+            "ask_colleague -> Answer from accounting: {\"agent\": \"accounting\", \"ticket_id\": 102, \"summary\": \"As of the shop date 2026-08-31, there are no open invoices, so no unpaid invoice obligations compete with lease 1 rent from checking. Checking balance is $2,560.00; I could not retri...",
+            "final_result -> Final result processed."
+          ],
+          "output_summary": "{\"agent\": \"facilities\", \"ticket_id\": 102, \"summary\": \"Lease 1 is for the Chapel Street shop, with Elm City Properties as landlord. The lease records monthly rent of $2,400 due 2026-09-02, two days from the shop date of 2026-08-31; checking covers it, but leaves only $160. Accounting reports no open invoices currently competing for checking.\", \"facts\": [{\"field\": \"shop date\", \"value\": \"2026-08-31\", \"source_tool\": \"campus-customs_get_shop_date\"}, {\"field\": \"space and landlord\", \"value\": \"Chapel Street shop; Elm City Properties\", \"source_tool\": \"campus-customs_check_rent_status\"}, {\"field\": \"mont...",
+          "needs_human_approval": true,
+          "input_tokens": 4193,
+          "output_tokens": 705,
+          "duration_seconds": 19.19,
+          "error": null
+        },
+        {
+          "step": 4,
+          "run_id": "run-c0f316a0",
+          "timestamp": "2026-10-04T03:18:38.388653+00:00",
+          "agent": "facilities",
+          "ticket_id": 102,
+          "action": "delegated_by_accounting",
+          "model": "gpt-6-luna",
+          "prompt_summary": "accounting is asking you about ticket 102: For lease 1, what rent amount is due and on what date? Look up what you need with your own tools and answer for your part only.",
+          "tools_called": [
+            "campus-customs_get_shop_date({})",
+            "campus-customs_check_rent_status({\"lease_id\":1})",
+            "campus-customs_get_ticket_detail({\"ticket_id\":102})",
+            "final_result({\"agent\":\"facilities\",\"ticket_id\":102,\"summary\":\"For the Chapel Street shop, leased from Elm City Properties, lease 1 se...)"
+          ],
+          "tool_results_summary": [
+            "campus-customs_get_shop_date -> {'found': True, 'date_today': '2026-08-31'}",
+            "campus-customs_check_rent_status -> {'found': True, 'lease_id': 1, 'space_name': 'Chapel Street shop', 'landlord': 'Elm City Properties', 'monthly_rent': 2400.0, 'next_due': '2026-09-02', 'as_of': '2026-08-31', 'days_until_due': 2, 'is_overdue': False, 'account': 'checking', 'balance': 2560.0, '...",
+            "campus-customs_get_ticket_detail -> {'found': True, 'id': 102, 'type': 'rent_notice', 'requester': 'Elm City Properties', 'subject': 'Rent due', 'sku': None, 'size': None, 'qty': None, 'lease_id': 1, 'invoice_id': None, 'status': 'open', 'notes': 'Email: shop rent due in 2 days.', 'created_at': ...",
+            "final_result -> Final result processed."
+          ],
+          "output_summary": "{\"agent\": \"facilities\", \"ticket_id\": 102, \"summary\": \"For the Chapel Street shop, leased from Elm City Properties, lease 1 sets monthly rent at $2,400, due September 2, 2026 (2 days from the shop date, August 31). Checking has $2,560 and would have $160 remaining after rent; this is rent-only and does not account for other obligations.\", \"facts\": [{\"field\": \"Space and landlord\", \"value\": \"Chapel Street shop; Elm City Properties\", \"source_tool\": \"campus-customs_check_rent_status\"}, {\"field\": \"Rent due\", \"value\": \"$2,400.00\", \"source_tool\": \"campus-customs_check_rent_status\"}, {\"field\": \"Next du...",
+          "needs_human_approval": true,
+          "input_tokens": 3786,
+          "output_tokens": 607,
+          "duration_seconds": 7.04,
+          "error": null
+        },
+        {
+          "step": 5,
+          "run_id": "run-c0f316a0",
+          "timestamp": "2026-10-04T03:18:42.716438+00:00",
+          "agent": "accounting",
+          "ticket_id": 102,
+          "action": "specialist_report",
+          "model": "gpt-6-luna",
+          "prompt_summary": "Ticket 102. Type: rent_notice. Requester: Elm City Properties. Subject: Rent due. Notes: Email: shop rent due in 2 days.. sku=None size=None qty=None lease_id=1 invoice_id=None. Look up what you need with your tools and report on your part of this.",
+          "tools_called": [
+            "campus-customs_get_shop_date({})",
+            "campus-customs_get_ticket_detail({\"ticket_id\":102})",
+            "campus-customs_get_cash_balance({\"account\":\"checking\"})",
+            "campus-customs_list_open_invoices({})",
+            "ask_colleague({\"colleague\":\"facilities\",\"question\":\"For lease 1, what rent amount is due and on what date?\"})",
+            "final_result({\"agent\":\"accounting\",\"ticket_id\":102,\"summary\":\"Lease 1 rent is $2,400.00 due September 2, 2026, two days after the sho...)"
+          ],
+          "tool_results_summary": [
+            "campus-customs_get_shop_date -> {'found': True, 'date_today': '2026-08-31'}",
+            "campus-customs_get_ticket_detail -> {'found': True, 'id': 102, 'type': 'rent_notice', 'requester': 'Elm City Properties', 'subject': 'Rent due', 'sku': None, 'size': None, 'qty': None, 'lease_id': 1, 'invoice_id': None, 'status': 'open', 'notes': 'Email: shop rent due in 2 days.', 'created_at': ...",
+            "campus-customs_get_cash_balance -> {'found': True, 'name': 'checking', 'balance': 2560.0, 'date': '2026-08-31'}",
+            "campus-customs_list_open_invoices -> {'found': False, 'as_of': '2026-08-31', 'count': 0, 'total_owed': 0, 'invoices': []}",
+            "ask_colleague -> Answer from facilities: {\"agent\": \"facilities\", \"ticket_id\": 102, \"summary\": \"For the Chapel Street shop, leased from Elm City Properties, lease 1 sets monthly rent at $2,400, due September 2, 2026 (2 days from the shop date, August 31). Checking has $2,560 an...",
+            "final_result -> Final result processed."
+          ],
+          "output_summary": "{\"agent\": \"accounting\", \"ticket_id\": 102, \"summary\": \"Lease 1 rent is $2,400.00 due September 2, 2026, two days after the shop date of August 31, 2026. Checking has $2,560.00 and there are no open invoices listed; paying rent would leave $160.00 before any other expenses.\", \"facts\": [{\"field\": \"Shop date\", \"value\": \"2026-08-31\", \"source_tool\": \"campus-customs_get_shop_date\"}, {\"field\": \"Checking balance\", \"value\": \"$2,560.00\", \"source_tool\": \"campus-customs_get_cash_balance\"}, {\"field\": \"Open invoices\", \"value\": \"0 invoices; $0.00 total owed\", \"source_tool\": \"campus-customs_list_open_invoices\"...",
+          "needs_human_approval": true,
+          "input_tokens": 4667,
+          "output_tokens": 663,
+          "duration_seconds": 13.84,
+          "error": null
+        },
+        {
+          "step": 6,
+          "run_id": "run-c0f316a0",
+          "timestamp": "2026-10-04T03:18:47.311984+00:00",
+          "agent": "boss",
+          "ticket_id": 102,
+          "action": "final_decision",
+          "model": "gpt-6-luna",
+          "prompt_summary": "Ticket 102 (rent_notice): Rent due. Notes: Email: shop rent due in 2 days.. Your specialists reported: [facilities] summary: Lease 1 is for the Chapel Street shop, with Elm City Properties as landlord. The lease records monthly rent of $2,400 due 2026-09-02, two days from the shop date of 2026-08-31; checking covers it, but leaves only $160. Accounting reports no open invoices currently competing ...",
+          "tools_called": [
+            "campus-customs_get_shop_date({})",
+            "final_result({\"ticket_id\":102,\"decision\":\"Request human approval to pay the $2,400 rent for Lease 1 by September 2, 2026. Do not issu...)"
+          ],
+          "tool_results_summary": [
+            "campus-customs_get_shop_date -> {'found': True, 'date_today': '2026-08-31'}",
+            "final_result -> Final result processed."
+          ],
+          "output_summary": "{\"ticket_id\": 102, \"decision\": \"Request human approval to pay the $2,400 rent for Lease 1 by September 2, 2026. Do not issue the payment without approval.\", \"rationale\": \"The rent is due in two days (shop date: August 31, 2026). Checking has $2,560 and there are no open invoices, but paying rent would leave only $160 before other expenses.\", \"human_approval_required\": true, \"approval_reason\": \"The owner must approve paying $2,400 in rent; checking would fall to $160, leaving little for other expenses.\", \"proposed_payments\": [{\"kind\": \"rent\", \"invoice_id\": null, \"lease_id\": 1, \"sku\": null, \"siz...",
+          "needs_human_approval": true,
+          "input_tokens": 4003,
+          "output_tokens": 281,
+          "duration_seconds": 4.59,
+          "error": null
+        },
+        {
+          "step": 7,
+          "run_id": "run-c0f316a0",
+          "timestamp": "2026-10-04T03:18:47.967504+00:00",
+          "agent": "boss",
+          "ticket_id": 102,
+          "action": "prepared_payment",
+          "model": "gpt-6-luna",
+          "prompt_summary": null,
+          "tools_called": [],
+          "tool_results_summary": [],
+          "output_summary": "{\"id\": \"apr-4bb22c00\", \"kind\": \"rent\", \"amount\": 2400.0, \"payee\": \"Elm City Properties\", \"description\": \"Rent for Chapel Street shop, due 2026-09-02\"}",
+          "needs_human_approval": true,
+          "input_tokens": null,
+          "output_tokens": null,
+          "duration_seconds": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "run_id": "run-fdd1717a",
+      "model": "gpt-6-luna",
+      "started_at": "2026-10-04T03:19:18.056881+00:00",
+      "updated_at": "2026-10-04T03:21:38.424291+00:00",
+      "database": "data/campus_customs_new.db",
+      "tool_source": "MCP server 'campus-customs' via .mcp.json",
+      "note": "Every shop fact in this run came from the MCP server. No agent has a tool that writes to the database or sends a payment.",
+      "total_steps": 9,
+      "agents_used": [
+        "accounting",
+        "boss",
+        "customer_service",
+        "inventory"
+      ],
+      "tickets_handled": [
+        103
+      ],
+      "total_input_tokens": 46126,
+      "total_output_tokens": 6557,
+      "steps_awaiting_human_approval": 7,
+      "errors": [
+        "UsageLimitExceeded: The next request would exceed the request_limit of 6. Consider raising the limit, or see the docs on usage limits for budget-aware patterns: https://pydantic.dev/docs/ai/core-concepts/agent/#usage-limits"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "run_id": "run-fdd1717a",
+          "timestamp": "2026-10-04T03:19:24.319608+00:00",
+          "agent": "boss",
+          "ticket_id": 103,
+          "action": "route_ticket",
+          "model": "gpt-6-luna",
+          "prompt_summary": "Ticket 103 is open. Type: price_override. Requester: Yale AI Club. Subject: Bulk hoodie discount. Notes: Student org wants 20 hoodies, size M, asking for a bulk discount.. Decide which specialists should look at this and why.",
+          "tools_called": [
+            "campus-customs_get_shop_date({})",
+            "campus-customs_get_ticket_detail({\"ticket_id\":103})",
+            "final_result({\"ticket_id\":103,\"ticket_type\":\"price_override\",\"route_to\":[\"inventory\",\"accounting\",\"customer_service\"],\"reason\":\"Inven...)"
+          ],
+          "tool_results_summary": [
+            "campus-customs_get_shop_date -> {'found': True, 'date_today': '2026-08-31'}",
+            "campus-customs_get_ticket_detail -> {'found': True, 'id': 103, 'type': 'price_override', 'requester': 'Yale AI Club', 'subject': 'Bulk hoodie discount', 'sku': 'CC-HOOD-NAVY', 'size': 'M', 'qty': 20, 'lease_id': None, 'invoice_id': None, 'status': 'open', 'notes': 'Student org wants 20 hoodies, ...",
+            "final_result -> Final result processed."
+          ],
+          "output_summary": "{\"ticket_id\": 103, \"ticket_type\": \"price_override\", \"route_to\": [\"inventory\", \"accounting\", \"customer_service\"], \"reason\": \"Inventory should confirm whether 20 medium navy hoodies are available or require replenishment. Accounting should assess the requested bulk discount against pricing and margins, and Customer Service should advise how to respond to Yale AI Club.\"}",
+          "needs_human_approval": false,
+          "input_tokens": 4081,
+          "output_tokens": 237,
+          "duration_seconds": 5.87,
+          "error": null
+        },
+        {
+          "step": 2,
+          "run_id": "run-fdd1717a",
+          "timestamp": "2026-10-04T03:19:31.241020+00:00",
+          "agent": "inventory",
+          "ticket_id": 103,
+          "action": "specialist_report",
+          "model": "gpt-6-luna",
+          "prompt_summary": "Ticket 103. Type: price_override. Requester: Yale AI Club. Subject: Bulk hoodie discount. Notes: Student org wants 20 hoodies, size M, asking for a bulk discount.. sku=CC-HOOD-NAVY size=M qty=20 lease_id=None invoice_id=None. Look up what you need with your tools and report on your part of this.",
+          "tools_called": [
+            "campus-customs_check_stock({\"sku\":\"CC-HOOD-NAVY\",\"size\":\"M\"})",
+            "final_result({\"agent\":\"inventory\",\"ticket_id\":103,\"summary\":\"Stock check found 8 medium CC-HOOD-NAVY hoodies available for the reques...)"
+          ],
+          "tool_results_summary": [
+            "campus-customs_check_stock -> {'found': True, 'sku': 'CC-HOOD-NAVY', 'name': 'Basic Hoodie Big Yale', 'size': 'M', 'qty': 8, 'location': 'Aisle A', 'in_stock': True, 'other_sizes': [{'size': 'L', 'qty': 14, 'location': 'Aisle A'}, {'size': 'XL', 'qty': 6, 'location': 'Aisle A'}, {'size': '...",
+            "final_result -> Final result processed."
+          ],
+          "output_summary": "{\"agent\": \"inventory\", \"ticket_id\": 103, \"summary\": \"Stock check found 8 medium CC-HOOD-NAVY hoodies available for the requested 20, leaving a shortage of 12. The current stock cannot fulfill the full request; the ticket provides no invoice or vendor details to verify an incoming reprint or delivery timing.\", \"facts\": [{\"field\": \"CC-HOOD-NAVY size M on hand\", \"value\": \"8\", \"source_tool\": \"campus-customs_check_stock\"}, {\"field\": \"Requested quantity\", \"value\": \"20\", \"source_tool\": \"Ticket details provided by requester\"}, {\"field\": \"Units short\", \"value\": \"12\", \"source_tool\": \"Calculated from tic...",
+          "needs_human_approval": true,
+          "input_tokens": 3785,
+          "output_tokens": 482,
+          "duration_seconds": 6.92,
+          "error": null
+        },
+        {
+          "step": 3,
+          "run_id": "run-fdd1717a",
+          "timestamp": "2026-10-04T03:19:40.305702+00:00",
+          "agent": "accounting",
+          "ticket_id": 103,
+          "action": "specialist_report",
+          "model": "gpt-6-luna",
+          "prompt_summary": "Ticket 103. Type: price_override. Requester: Yale AI Club. Subject: Bulk hoodie discount. Notes: Student org wants 20 hoodies, size M, asking for a bulk discount.. sku=CC-HOOD-NAVY size=M qty=20 lease_id=None invoice_id=None. Look up what you need with your tools and report on your part of this.",
+          "tools_called": [
+            "campus-customs_get_price_and_margin({\"sku\":\"CC-HOOD-NAVY\",\"qty\":20,\"discount_pct\":0})",
+            "final_result({\"agent\":\"accounting\",\"ticket_id\":103,\"summary\":\"For CC-HOOD-NAVY, the list price is $58.00 per hoodie and unit cost is ...)"
+          ],
+          "tool_results_summary": [
+            "campus-customs_get_price_and_margin -> {'found': True, 'sku': 'CC-HOOD-NAVY', 'unit_cost': 22.0, 'list_price': 58.0, 'margin_per_unit': 36.0, 'qty': 20, 'discount_pct': 0.0, 'discounted_unit_price': 58.0, 'below_cost': False, 'max_discount_pct': 62.07, 'total_at_discount': 1160.0, 'total_margin_at_....",
+            "final_result -> Final result processed."
+          ],
+          "output_summary": "{\"agent\": \"accounting\", \"ticket_id\": 103, \"summary\": \"For CC-HOOD-NAVY, the list price is $58.00 per hoodie and unit cost is $22.00. The tool reports a maximum break-even discount of 62.07%; a discount must be below that ceiling to keep the sale price above cost. No specific discount percentage was supplied, so I cannot test or approve a particular offer.\", \"facts\": [{\"field\": \"Unit cost\", \"value\": \"$22.00\", \"source_tool\": \"campus-customs_get_price_and_margin\"}, {\"field\": \"List price\", \"value\": \"$58.00\", \"source_tool\": \"campus-customs_get_price_and_margin\"}, {\"field\": \"Maximum break-even disco...",
+          "needs_human_approval": true,
+          "input_tokens": 4146,
+          "output_tokens": 740,
+          "duration_seconds": 9.06,
+          "error": null
+        },
+        {
+          "step": 4,
+          "run_id": "run-fdd1717a",
+          "timestamp": "2026-10-04T03:19:51.822559+00:00",
+          "agent": "accounting",
+          "ticket_id": 103,
+          "action": "delegated_by_customer_service",
+          "model": "gpt-6-luna",
+          "prompt_summary": "customer_service is asking you about ticket 103: For ticket 103, CC-HOOD-NAVY size M, qty 20, what discount (if any) is financially supportable / floor price? Include regular price and minimum if available. Look up what you need with your own tools and answer for your part only.",
+          "tools_called": [
+            "campus-customs_get_price_and_margin({\"sku\":\"CC-HOOD-NAVY\",\"qty\":20,\"discount_pct\":0})",
+            "final_result({\"agent\":\"accounting\",\"ticket_id\":103,\"summary\":\"For CC-HOOD-NAVY, regular list price is $58.00 per unit ($1,160.00 for ...)"
+          ],
+          "tool_results_summary": [
+            "campus-customs_get_price_and_margin -> {'found': True, 'sku': 'CC-HOOD-NAVY', 'unit_cost': 22.0, 'list_price': 58.0, 'margin_per_unit': 36.0, 'qty': 20, 'discount_pct': 0.0, 'discounted_unit_price': 58.0, 'below_cost': False, 'max_discount_pct': 62.07, 'total_at_discount': 1160.0, 'total_margin_at_....",
+            "final_result -> Final result processed."
+          ],
+          "output_summary": "{\"agent\": \"accounting\", \"ticket_id\": 103, \"summary\": \"For CC-HOOD-NAVY, regular list price is $58.00 per unit ($1,160.00 for 20). Unit cost is $22.00, so the break-even floor is $22.00 per unit ($440.00 for 20), corresponding to a maximum discount of 62.07%; discounts above that would price below cost.\", \"facts\": [{\"field\": \"list price per unit\", \"value\": \"$58.00\", \"source_tool\": \"campus-customs_get_price_and_margin\"}, {\"field\": \"unit cost / minimum break-even price\", \"value\": \"$22.00\", \"source_tool\": \"campus-customs_get_price_and_margin\"}, {\"field\": \"maximum discount before below-cost pricing...",
+          "needs_human_approval": true,
+          "input_tokens": 4052,
+          "output_tokens": 346,
+          "duration_seconds": 5.84,
+          "error": null
+        },
+        {
+          "step": 5,
+          "run_id": "run-fdd1717a",
+          "timestamp": "2026-10-04T03:20:08.925381+00:00",
+          "agent": "inventory",
+          "ticket_id": 103,
+          "action": "delegated_by_boss",
+          "model": "gpt-6-luna",
+          "prompt_summary": "boss is asking you about ticket 103: For ticket 103: CC-HOOD-NAVY size M, need 20, only 8 in stock per ticket context. Confirm stock, whether remaining 12 can be sourced/reordered, vendor/lead time/cost/purchase details if available, and any fulfillment constraints. Look up what you need with your own tools and answer for your part only.",
+          "tools_called": [
+            "campus-customs_get_ticket_detail({\"ticket_id\":103})",
+            "campus-customs_check_stock({\"sku\":\"CC-HOOD-NAVY\",\"size\":\"M\"})",
+            "campus-customs_get_shop_date({})",
+            "ask_colleague({\"colleague\":\"customer_service\",\"question\":\"For ticket 103 (Yale AI Club, CC-HOOD-NAVY size M, qty 20), confirm requeste...)",
+            "final_result({\"agent\":\"inventory\",\"ticket_id\":103,\"summary\":\"Confirmed 8 CC-HOOD-NAVY hoodies in size M are in stock, leaving 12 of t...)"
+          ],
+          "tool_results_summary": [
+            "campus-customs_get_ticket_detail -> {'found': True, 'id': 103, 'type': 'price_override', 'requester': 'Yale AI Club', 'subject': 'Bulk hoodie discount', 'sku': 'CC-HOOD-NAVY', 'size': 'M', 'qty': 20, 'lease_id': None, 'invoice_id': None, 'status': 'open', 'notes': 'Student org wants 20 hoodies, ...",
+            "campus-customs_check_stock -> {'found': True, 'sku': 'CC-HOOD-NAVY', 'name': 'Basic Hoodie Big Yale', 'size': 'M', 'qty': 8, 'location': 'Aisle A', 'in_stock': True, 'other_sizes': [{'size': 'L', 'qty': 14, 'location': 'Aisle A'}, {'size': 'XL', 'qty': 6, 'location': 'Aisle A'}, {'size': '...",
+            "campus-customs_get_shop_date -> {'found': True, 'date_today': '2026-08-31'}",
+            "ask_colleague -> Refused: customer_service is already in this chain (customer_service -> boss -> inventory). Answer with what you have.",
+            "final_result -> Final result processed."
+          ],
+          "output_summary": "{\"agent\": \"inventory\", \"ticket_id\": 103, \"summary\": \"Confirmed 8 CC-HOOD-NAVY hoodies in size M are in stock, leaving 12 of the requested 20 unfilled. The ticket has no linked invoice or vendor information, so I cannot confirm that a reorder is placed, give a lead time or cost, or promise fulfillment of the remaining units.\", \"facts\": [{\"field\": \"ticket SKU, size, and requested quantity\", \"value\": \"CC-HOOD-NAVY, M, qty 20\", \"source_tool\": \"campus-customs_get_ticket_detail\"}, {\"field\": \"stock of CC-HOOD-NAVY size M\", \"value\": \"8 units\", \"source_tool\": \"campus-customs_check_stock\"}, {\"field\": \"o...",
+          "needs_human_approval": true,
+          "input_tokens": 6050,
+          "output_tokens": 700,
+          "duration_seconds": 8.12,
+          "error": null
+        },
+        {
+          "step": 6,
+          "run_id": "run-fdd1717a",
+          "timestamp": "2026-10-04T03:20:23.766248+00:00",
+          "agent": "accounting",
+          "ticket_id": 103,
+          "action": "delegated_by_boss",
+          "model": "gpt-6-luna",
+          "prompt_summary": "boss is asking you about ticket 103: For ticket 103, Yale AI Club requests 20 CC-HOOD-NAVY M with bulk discount. Ticket context says $58 list and $22 cost floor. What discount/price can be offered while respecting margin/shop rules, and does any discounted offer require human approval? Any other relevant invoice/cash constraints? Look up what you need with your own tools and answer for your part o...",
+          "tools_called": [
+            "campus-customs_get_price_and_margin({\"sku\":\"CC-HOOD-NAVY\",\"qty\":20,\"discount_pct\":0})",
+            "campus-customs_list_open_invoices({})",
+            "campus-customs_get_cash_balance({\"account\":\"checking\"})",
+            "campus-customs_get_shop_date({})",
+            "campus-customs_list_payments_made({})",
+            "ask_colleague({\"colleague\":\"facilities\",\"question\":\"For ticket 103, what rent amount is due next and when, and does it draw from check...)",
+            "campus-customs_get_price_and_margin({\"sku\":\"CC-HOOD-NAVY\",\"qty\":20,\"discount_pct\":62.06})",
+            "campus-customs_get_price_and_margin({\"sku\":\"CC-HOOD-NAVY\",\"qty\":20,\"discount_pct\":62.07})",
+            "final_result({\"agent\":\"accounting\",\"ticket_id\":103,\"summary\":\"The break-even ceiling is a 62.07% discount: $22.00 per hoodie, or $440...)"
+          ],
+          "tool_results_summary": [
+            "campus-customs_get_price_and_margin -> {'found': True, 'sku': 'CC-HOOD-NAVY', 'unit_cost': 22.0, 'list_price': 58.0, 'margin_per_unit': 36.0, 'qty': 20, 'discount_pct': 0.0, 'discounted_unit_price': 58.0, 'below_cost': False, 'max_discount_pct': 62.07, 'total_at_discount': 1160.0, 'total_margin_at_....",
+            "campus-customs_list_open_invoices -> {'found': False, 'as_of': '2026-08-31', 'count': 0, 'total_owed': 0, 'invoices': []}",
+            "campus-customs_get_cash_balance -> {'found': True, 'name': 'checking', 'balance': 160.0, 'date': '2026-08-31'}",
+            "campus-customs_get_shop_date -> {'found': True, 'date_today': '2026-08-31'}",
+            "campus-customs_list_payments_made -> {'found': True, 'count': 2, 'payments': [{'id': 1, 'kind': 'invoice', 'ref_id': 501, 'amount': 840.0, 'account': 'checking', 'paid_at': '2026-08-31', 'approved_by': 'Varun Matta'}, {'id': 2, 'kind': 'rent', 'ref_id': 1, 'amount': 2400.0, 'account': 'checking',...",
+            "ask_colleague -> Refused: delegation depth limit reached. Answer with what you have.",
+            "campus-customs_get_price_and_margin -> {'found': True, 'sku': 'CC-HOOD-NAVY', 'unit_cost': 22.0, 'list_price': 58.0, 'margin_per_unit': 36.0, 'qty': 20, 'discount_pct': 62.06, 'discounted_unit_price': 22.01, 'below_cost': False, 'max_discount_pct': 62.07, 'total_at_discount': 440.2, 'total_margin_a....",
+            "campus-customs_get_price_and_margin -> {'found': True, 'sku': 'CC-HOOD-NAVY', 'unit_cost': 22.0, 'list_price': 58.0, 'margin_per_unit': 36.0, 'qty': 20, 'discount_pct': 62.07, 'discounted_unit_price': 22.0, 'below_cost': False, 'max_discount_pct': 62.07, 'total_at_discount': 440.0, 'total_margin_at....",
+            "final_result -> Final result processed."
+          ],
+          "output_summary": "{\"agent\": \"accounting\", \"ticket_id\": 103, \"summary\": \"The break-even ceiling is a 62.07% discount: $22.00 per hoodie, or $440.00 for 20, with zero margin. To retain a positive margin, recommend no more than 62.06% off ($22.01 each; $440.20 total; $0.20 total margin); any discounted offer requires human approval. Checking has $160.00 and there are no open invoices, but I could not verify upcoming rent, so overall cash availability against that obligation is unresolved.\", \"facts\": [{\"field\": \"CC-HOOD-NAVY unit cost and list price\", \"value\": \"$22.00 unit cost; $58.00 list price\", \"source_tool\": \"...",
+          "needs_human_approval": true,
+          "input_tokens": 8190,
+          "output_tokens": 2328,
+          "duration_seconds": 22.96,
+          "error": null
+        },
+        {
+          "step": 7,
+          "run_id": "run-fdd1717a",
+          "timestamp": "2026-10-04T03:21:24.873471+00:00",
+          "agent": "boss",
+          "ticket_id": 103,
+          "action": "delegated_by_customer_service",
+          "model": "gpt-6-luna",
+          "prompt_summary": "customer_service is asking you about ticket 103: Ticket 103: Yale AI Club requests 20 CC-HOOD-NAVY hoodies size M and a bulk discount. Stock check shows only 8 M on hand (other sizes don't fulfill exact requested size); accounting says $58 list, $22 cost floor. What should we offer/tell them, including approval decision on any discount and remaining 12? Look up what you need with your own tools an...",
+          "tools_called": [],
+          "tool_results_summary": [],
+          "output_summary": null,
+          "needs_human_approval": false,
+          "input_tokens": null,
+          "output_tokens": null,
+          "duration_seconds": 90.9,
+          "error": "UsageLimitExceeded: The next request would exceed the request_limit of 6. Consider raising the limit, or see the docs on usage limits for budget-aware patterns: https://pydantic.dev/docs/ai/core-concepts/agent/#usage-limits"
+        },
+        {
+          "step": 8,
+          "run_id": "run-fdd1717a",
+          "timestamp": "2026-10-04T03:21:31.112104+00:00",
+          "agent": "customer_service",
+          "ticket_id": 103,
+          "action": "specialist_report",
+          "model": "gpt-6-luna",
+          "prompt_summary": "Ticket 103. Type: price_override. Requester: Yale AI Club. Subject: Bulk hoodie discount. Notes: Student org wants 20 hoodies, size M, asking for a bulk discount.. sku=CC-HOOD-NAVY size=M qty=20 lease_id=None invoice_id=None. Look up what you need with your tools and report on your part of this.",
+          "tools_called": [
+            "campus-customs_get_ticket_detail({\"ticket_id\":103})",
+            "campus-customs_check_stock({\"sku\":\"CC-HOOD-NAVY\",\"size\":\"M\"})",
+            "ask_colleague({\"colleague\":\"accounting\",\"question\":\"For ticket 103, CC-HOOD-NAVY size M, qty 20, what discount (if any) is financially...)",
+            "ask_colleague({\"colleague\":\"boss\",\"question\":\"Ticket 103: Yale AI Club requests 20 CC-HOOD-NAVY hoodies size M and a bulk discount. St...)",
+            "final_result({\"agent\":\"customer_service\",\"ticket_id\":103,\"summary\":\"Yale AI Club asked for 20 medium navy hoodies and a bulk discount...)"
+          ],
+          "tool_results_summary": [
+            "campus-customs_get_ticket_detail -> {'found': True, 'id': 103, 'type': 'price_override', 'requester': 'Yale AI Club', 'subject': 'Bulk hoodie discount', 'sku': 'CC-HOOD-NAVY', 'size': 'M', 'qty': 20, 'lease_id': None, 'invoice_id': None, 'status': 'open', 'notes': 'Student org wants 20 hoodies, ...",
+            "campus-customs_check_stock -> {'found': True, 'sku': 'CC-HOOD-NAVY', 'name': 'Basic Hoodie Big Yale', 'size': 'M', 'qty': 8, 'location': 'Aisle A', 'in_stock': True, 'other_sizes': [{'size': 'L', 'qty': 14, 'location': 'Aisle A'}, {'size': 'XL', 'qty': 6, 'location': 'Aisle A'}, {'size': '...",
+            "ask_colleague -> Answer from accounting: {\"agent\": \"accounting\", \"ticket_id\": 103, \"summary\": \"For CC-HOOD-NAVY, regular list price is $58.00 per unit ($1,160.00 for 20). Unit cost is $22.00, so the break-even floor is $22.00 per unit ($440.00 for 20), corresponding to a maxim...",
+            "ask_colleague -> boss could not answer (UsageLimitExceeded). Treat this as unknown.",
+            "final_result -> Final result processed."
+          ],
+          "output_summary": "{\"agent\": \"customer_service\", \"ticket_id\": 103, \"summary\": \"Yale AI Club asked for 20 medium navy hoodies and a bulk discount. Only 8 size M are in stock; accounting provided the list price and cost floor, but the Boss could not provide an approval decision on the discount or a plan for the remaining 12.\", \"facts\": [{\"field\": \"request\", \"value\": \"20 CC-HOOD-NAVY hoodies, size M, with a bulk discount\", \"source_tool\": \"campus-customs_get_ticket_detail\"}, {\"field\": \"stock of CC-HOOD-NAVY size M\", \"value\": \"8 units\", \"source_tool\": \"campus-customs_check_stock\"}, {\"field\": \"list price per unit\", \"v...",
+          "needs_human_approval": true,
+          "input_tokens": 11503,
+          "output_tokens": 1073,
+          "duration_seconds": 110.81,
+          "error": null
+        },
+        {
+          "step": 9,
+          "run_id": "run-fdd1717a",
+          "timestamp": "2026-10-04T03:21:38.424132+00:00",
+          "agent": "boss",
+          "ticket_id": 103,
+          "action": "final_decision",
+          "model": "gpt-6-luna",
+          "prompt_summary": "Ticket 103 (price_override): Bulk hoodie discount. Notes: Student org wants 20 hoodies, size M, asking for a bulk discount.. Your specialists reported: [inventory] summary: Stock check found 8 medium CC-HOOD-NAVY hoodies available for the requested 20, leaving a shortage of 12. The current stock cannot fulfill the full request; the ticket provides no invoice or vendor details to verify an incoming...",
+          "tools_called": [
+            "campus-customs_get_shop_date({})",
+            "final_result({\"ticket_id\":103,\"decision\":\"Do not approve or quote a bulk discount yet; ask Yale AI Club what discount percentage they...)"
+          ],
+          "tool_results_summary": [
+            "campus-customs_get_shop_date -> {'found': True, 'date_today': '2026-08-31'}",
+            "final_result -> Final result processed."
+          ],
+          "output_summary": "{\"ticket_id\": 103, \"decision\": \"Do not approve or quote a bulk discount yet; ask Yale AI Club what discount percentage they are requesting. Tell them 8 medium navy hoodies are available at the $58 list price, but the shop cannot currently supply all 20. Do not promise the remaining 12 or a delivery date; first obtain reorder/vendor details and decide whether to pursue restocking.\", \"rationale\": \"Inventory reports 8 of the requested 20 in size M, a shortfall of 12, with no vendor, invoice, or timing details. Accounting reports a $58 list price, $22 unit cost, and a 62.07% break-even ceiling, bu...",
+          "needs_human_approval": true,
+          "input_tokens": 4319,
+          "output_tokens": 651,
+          "duration_seconds": 7.31,
+          "error": null
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "campus-customs": {
+      "command": "${HW5_PYTHON:-python}",
+      "args": ["-m", "mcp_server.server"],
+      "cwd": "${HW5_ROOT:-.}",
+      "env": {
+        "PYTHONPATH": "${HW5_ROOT:-.}"
+      }
+    }
+  }
+}

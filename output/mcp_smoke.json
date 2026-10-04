@@ -1,0 +1,152 @@
+{
+  "description": "Smoke test of the Campus Customs MCP server. Each tool was called over MCP through the connection in .mcp.json, and the values it returned were checked against data/campus_customs_new.db.",
+  "server": "campus-customs",
+  "database": "data/campus_customs_new.db",
+  "connection_config": ".mcp.json",
+  "run_at": "2026-10-04T00:50:42.214012+00:00",
+  "tools_tested": 3,
+  "all_tools_match_database": true,
+  "results": [
+    {
+      "ticket": 101,
+      "prompt": "Ticket 101 wants a Classic Bulldog Tee in size small. Do we actually have one in stock?",
+      "tool_name": "check_stock",
+      "arguments": {
+        "sku": "CC-TEE-WHITE",
+        "size": "S"
+      },
+      "tool_output": {
+        "found": true,
+        "sku": "CC-TEE-WHITE",
+        "name": "Classic Bulldog Tee",
+        "size": "S",
+        "qty": 0,
+        "location": "Aisle B",
+        "in_stock": false,
+        "other_sizes": [
+          {
+            "size": "M",
+            "qty": 5,
+            "location": "Aisle B"
+          },
+          {
+            "size": "L",
+            "qty": 3,
+            "location": "Aisle B"
+          },
+          {
+            "size": "XL",
+            "qty": 2,
+            "location": "Aisle B"
+          }
+        ]
+      },
+      "verified_against_database": {
+        "qty": {
+          "tool_output": 0,
+          "database_value": 0,
+          "match": true
+        },
+        "location": {
+          "tool_output": "Aisle B",
+          "database_value": "Aisle B",
+          "match": true
+        },
+        "name": {
+          "tool_output": "Classic Bulldog Tee",
+          "database_value": "Classic Bulldog Tee",
+          "match": true
+        }
+      },
+      "all_values_match_database": true
+    },
+    {
+      "ticket": 102,
+      "prompt": "Elm City Properties says rent on the Chapel Street shop is due soon. When is it due, how much is it, and can checking cover it?",
+      "tool_name": "check_rent_status",
+      "arguments": {
+        "lease_id": 1
+      },
+      "tool_output": {
+        "found": true,
+        "lease_id": 1,
+        "space_name": "Chapel Street shop",
+        "landlord": "Elm City Properties",
+        "monthly_rent": 2400.0,
+        "next_due": "2026-09-02",
+        "as_of": "2026-08-31",
+        "days_until_due": 2,
+        "is_overdue": false,
+        "account": "checking",
+        "balance": 3400.0,
+        "covers_rent": true,
+        "balance_after_rent": 1000.0
+      },
+      "verified_against_database": {
+        "monthly_rent": {
+          "tool_output": 2400.0,
+          "database_value": 2400.0,
+          "match": true
+        },
+        "next_due": {
+          "tool_output": "2026-09-02",
+          "database_value": "2026-09-02",
+          "match": true
+        },
+        "landlord": {
+          "tool_output": "Elm City Properties",
+          "database_value": "Elm City Properties",
+          "match": true
+        },
+        "balance": {
+          "tool_output": 3400.0,
+          "database_value": 3400.0,
+          "match": true
+        },
+        "as_of": {
+          "tool_output": "2026-08-31",
+          "database_value": "2026-08-31",
+          "match": true
+        }
+      },
+      "all_values_match_database": true
+    },
+    {
+      "ticket": 103,
+      "prompt": "Yale AI Club wants 20 navy hoodies in medium and is asking for a bulk discount. If we gave them 15% off, would we still make money?",
+      "tool_name": "get_price_and_margin",
+      "arguments": {
+        "sku": "CC-HOOD-NAVY",
+        "qty": 20,
+        "discount_pct": 15
+      },
+      "tool_output": {
+        "found": true,
+        "sku": "CC-HOOD-NAVY",
+        "unit_cost": 22.0,
+        "list_price": 58.0,
+        "margin_per_unit": 36.0,
+        "qty": 20,
+        "discount_pct": 15.0,
+        "discounted_unit_price": 49.3,
+        "below_cost": false,
+        "max_discount_pct": 62.07,
+        "total_at_discount": 986.0,
+        "total_margin_at_discount": 546.0
+      },
+      "verified_against_database": {
+        "unit_cost": {
+          "tool_output": 22.0,
+          "database_value": 22.0,
+          "match": true
+        },
+        "list_price": {
+          "tool_output": 58.0,
+          "database_value": 58.0,
+          "match": true
+        }
+      },
+      "all_values_match_database": true
+    }
+  ]
+}

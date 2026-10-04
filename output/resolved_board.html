@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Campus Customs — Resolved Board</title>
+<style>
+  :root {
+    --bg: #0b0b0d; --surface: #16161b; --line: #2c2c35;
+    --text: #f2f2f5; --muted: #a6a6b2; --pink: #ff4fa3; --pink-soft: #ff8cc4;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 1100px; margin: 0 auto; padding: 28px 32px 48px; }
+  h1 { margin: 0; font-size: 24px; }
+  h1 span { color: var(--pink); }
+  .lead { color: var(--muted); margin: 6px 0 24px; }
+  .shot { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; margin-bottom: 20px; }
+  .shot h2 { margin: 0 0 4px; font-size: 18px; }
+  .shot .meta { color: var(--muted); margin: 0 0 12px; font-size: 14px; }
+  .shot img { display: block; width: 100%; border-radius: 8px; border: 1px solid var(--line); }
+  .missing { display: none; border: 1px dashed var(--line); border-radius: 10px; padding: 34px; text-align: center; color: var(--muted); }
+  .shot.no-image img { display: none; }
+  .shot.no-image .missing { display: block; }
+  code { font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--pink-soft); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Campus Customs <span>Resolved Board</span></h1>
+  <p class="lead">One screenshot of the React dashboard per ticket, taken after a real gpt-6-luna run resolved it.
+    Each image is <code>output/resolved_board/ticket-&lt;id&gt;.png</code>, captured from <code>http://localhost:5173/?ticket=&lt;id&gt;</code>.</p>
+
+  <section class="shot">
+    <h2>Ticket 101 — Bulldog tee</h2>
+    <p class="meta">Customer order · Tauhid Zaman · resolved by <code>run-bddd17ca</code> (gpt-6-luna) · invoice 501 paid $840.00, approved by Varun Matta · checking $2,560.00</p>
+    <img src="resolved_board/ticket-101.png" alt="Dashboard after ticket 101 was resolved"
+         onerror="this.parentElement.classList.add('no-image')">
+    <div class="missing">No screenshot yet. Ticket 101 hasn't been resolved by a real run.</div>
+  </section>
+
+  <section class="shot">
+    <h2>Ticket 102 — Rent due</h2>
+    <p class="meta">Rent notice · Elm City Properties · resolved by <code>run-c0f316a0</code> (gpt-6-luna) · rent paid $2,400.00, approved by Varun Matta · checking $160.00</p>
+    <img src="resolved_board/ticket-102.png" alt="Dashboard after ticket 102 was resolved"
+         onerror="this.parentElement.classList.add('no-image')">
+    <div class="missing">No screenshot yet. Ticket 102 hasn't been resolved by a real run.</div>
+  </section>
+
+  <section class="shot">
+    <h2>Ticket 103 — Bulk hoodie discount</h2>
+    <p class="meta">Price override · Yale AI Club · resolved by <code>run-fdd1717a</code> (gpt-6-luna) · no payment proposed · checking $160.00</p>
+    <img src="resolved_board/ticket-103.png" alt="Dashboard after ticket 103 was resolved"
+         onerror="this.parentElement.classList.add('no-image')">
+    <div class="missing">No screenshot yet. Ticket 103 hasn't been resolved by a real run.</div>
+  </section>
+</main>
+</body>
+</html>

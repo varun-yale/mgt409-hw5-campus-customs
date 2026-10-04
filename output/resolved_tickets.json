@@ -1,0 +1,308 @@
+{
+  "description": "Built from the real Problem 9 agent runs, audit trail, approvals, and working database. Only gpt-6-luna runs count.",
+  "simulation": false,
+  "generated_at": "2026-10-04T03:22:54.634709+00:00",
+  "required_model": "gpt-6-luna",
+  "complete": true,
+  "cash": {
+    "account": "checking",
+    "starting_balance": 3400.0,
+    "approved_payments_total": 3240.0,
+    "current_balance": 160.0,
+    "ending_balance": 160.0
+  },
+  "tickets": [
+    {
+      "ticket_id": 101,
+      "subject": "Bulldog tee",
+      "final_status": "resolved",
+      "run": {
+        "run_id": "run-bddd17ca",
+        "model": "gpt-6-luna",
+        "finished_at": "2026-10-04T03:17:26.393942+00:00"
+      },
+      "short_outcome": "Do not promise or ship the Bulldog tee in size S now: stock is 0, and the size-S reprint is not confirmed while invoice 501 remains unpaid. Ask the owner to approve payment of invoice 501 ($840.00); once paid, confirm with Inventory that the reprint is underway and stock is available before giving a shipment commitment. Tell the customer there is no confirmed restock date, and ask whether size M, L, or XL would work instead.",
+      "boss_routed_to": [
+        "inventory",
+        "accounting",
+        "customer_service"
+      ],
+      "agent_contributions": [
+        {
+          "agent": "boss",
+          "actions": [
+            "route_ticket",
+            "final_decision",
+            "prepared_payment"
+          ],
+          "tools_used": [
+            "get_shop_date",
+            "get_ticket_detail"
+          ],
+          "said": "Do not promise or ship the Bulldog tee in size S now: stock is 0, and the size-S reprint is not confirmed while invoice 501 remains unpaid. Ask the owner to approve payment of invoice 501 ($840.00); once paid, confirm with Inventory that the reprint is underway and stock is available before giving a shipment commitment. Tell the customer there is no confirmed restock date, and ask whether size M, L, or XL would work instead."
+        },
+        {
+          "agent": "inventory",
+          "actions": [
+            "specialist_report"
+          ],
+          "tools_used": [
+            "check_stock",
+            "get_ticket_detail",
+            "get_invoice_status",
+            "get_shop_date",
+            "get_vendor_lead_time"
+          ],
+          "said": "There are 0 units of CC-TEE-WHITE in size S, so the requested unit is short by 1. Invoice 501 for the size-S rush reprint is open and overdue; although Bulldog Print Co\\u2019s lead time is 5 days, the stock cannot be treated as incoming or assigned an arrival date until the invoice is paid."
+        },
+        {
+          "agent": "accounting",
+          "actions": [
+            "specialist_report"
+          ],
+          "tools_used": [
+            "get_shop_date",
+            "get_invoice_status"
+          ],
+          "said": "Invoice 501 is for the rush reprint of CC-TEE-WHITE size S. It remains unpaid and is 3 days overdue as of the shop date, so this reprint should not be treated as paid-for incoming stock for the customer order."
+        },
+        {
+          "agent": "customer_service",
+          "actions": [
+            "specialist_report"
+          ],
+          "tools_used": [
+            "get_ticket_detail",
+            "get_shop_date",
+            "check_stock",
+            "get_invoice_status"
+          ],
+          "said": "Size S is out of stock. The reprint invoice for size S is unpaid and overdue, so there is no confirmed restock timing; sizes M, L, and XL are currently available."
+        }
+      ],
+      "delegations": [],
+      "refused_delegations": [],
+      "human_approvals": [
+        {
+          "approval_id": "apr-c683c3ea",
+          "kind": "invoice",
+          "payee": "Bulldog Print Co",
+          "amount": 840.0,
+          "description": "Invoice 501: Rush reprint CC-TEE-WHITE S",
+          "reason": "Pay the open, overdue invoice for the size-S rush reprint needed to replenish the customer order.",
+          "approved_by": "Varun Matta",
+          "approved_at": "2026-10-04T03:17:51.233525+00:00",
+          "payment_id": 1,
+          "balance_after": 2560.0
+        }
+      ],
+      "pending_approvals": [],
+      "blocked_reason": null
+    },
+    {
+      "ticket_id": 102,
+      "subject": "Rent due",
+      "final_status": "resolved",
+      "run": {
+        "run_id": "run-c0f316a0",
+        "model": "gpt-6-luna",
+        "finished_at": "2026-10-04T03:18:47.311984+00:00"
+      },
+      "short_outcome": "Request human approval to pay the $2,400 rent for Lease 1 by September 2, 2026. Do not issue the payment without approval.",
+      "boss_routed_to": [
+        "facilities",
+        "accounting"
+      ],
+      "agent_contributions": [
+        {
+          "agent": "boss",
+          "actions": [
+            "route_ticket",
+            "final_decision",
+            "prepared_payment"
+          ],
+          "tools_used": [
+            "get_shop_date",
+            "get_ticket_detail"
+          ],
+          "said": "Request human approval to pay the $2,400 rent for Lease 1 by September 2, 2026. Do not issue the payment without approval."
+        },
+        {
+          "agent": "accounting",
+          "actions": [
+            "delegated_by_facilities",
+            "specialist_report"
+          ],
+          "tools_used": [
+            "list_open_invoices",
+            "ask_colleague",
+            "get_cash_balance",
+            "get_shop_date",
+            "get_ticket_detail"
+          ],
+          "said": "Lease 1 rent is $2,400.00 due September 2, 2026, two days after the shop date of August 31, 2026. Checking has $2,560.00 and there are no open invoices listed; paying rent would leave $160.00 before any other expenses."
+        },
+        {
+          "agent": "facilities",
+          "actions": [
+            "specialist_report",
+            "delegated_by_accounting"
+          ],
+          "tools_used": [
+            "get_shop_date",
+            "get_ticket_detail",
+            "check_rent_status",
+            "ask_colleague"
+          ],
+          "said": "For the Chapel Street shop, leased from Elm City Properties, lease 1 sets monthly rent at $2,400, due September 2, 2026 (2 days from the shop date, August 31). Checking has $2,560 and would have $160 remaining after rent; this is rent-only and does not account for other obligations."
+        }
+      ],
+      "delegations": [
+        {
+          "from": "facilities",
+          "to": "accounting",
+          "result": "answered"
+        },
+        {
+          "from": "accounting",
+          "to": "facilities",
+          "result": "answered"
+        }
+      ],
+      "refused_delegations": [
+        {
+          "from": "accounting",
+          "to": "facilities",
+          "result": "Refused: facilities is already in this chain (facilities -> accounting). Answer with what you have."
+        }
+      ],
+      "human_approvals": [
+        {
+          "approval_id": "apr-4bb22c00",
+          "kind": "rent",
+          "payee": "Elm City Properties",
+          "amount": 2400.0,
+          "description": "Rent for Chapel Street shop, due 2026-09-02",
+          "reason": "Lease 1 rent of $2,400 is due September 2, 2026.",
+          "approved_by": "Varun Matta",
+          "approved_at": "2026-10-04T03:19:04.886350+00:00",
+          "payment_id": 2,
+          "balance_after": 160.0
+        }
+      ],
+      "pending_approvals": [],
+      "blocked_reason": null
+    },
+    {
+      "ticket_id": 103,
+      "subject": "Bulk hoodie discount",
+      "final_status": "resolved",
+      "run": {
+        "run_id": "run-fdd1717a",
+        "model": "gpt-6-luna",
+        "finished_at": "2026-10-04T03:21:38.424132+00:00"
+      },
+      "short_outcome": "Do not approve or quote a bulk discount yet; ask Yale AI Club what discount percentage they are requesting. Tell them 8 medium navy hoodies are available at the $58 list price, but the shop cannot currently supply all 20. Do not promise the remaining 12 or a delivery date; first obtain reorder/vendor details and decide whether to pursue restocking.",
+      "boss_routed_to": [
+        "inventory",
+        "accounting",
+        "customer_service"
+      ],
+      "agent_contributions": [
+        {
+          "agent": "boss",
+          "actions": [
+            "route_ticket",
+            "delegated_by_customer_service",
+            "final_decision"
+          ],
+          "tools_used": [
+            "get_shop_date",
+            "get_ticket_detail"
+          ],
+          "said": "Do not approve or quote a bulk discount yet; ask Yale AI Club what discount percentage they are requesting. Tell them 8 medium navy hoodies are available at the $58 list price, but the shop cannot currently supply all 20. Do not promise the remaining 12 or a delivery date; first obtain reorder/vendor details and decide whether to pursue restocking."
+        },
+        {
+          "agent": "inventory",
+          "actions": [
+            "specialist_report",
+            "delegated_by_boss"
+          ],
+          "tools_used": [
+            "check_stock",
+            "get_ticket_detail",
+            "get_shop_date",
+            "ask_colleague"
+          ],
+          "said": "Confirmed 8 CC-HOOD-NAVY hoodies in size M are in stock, leaving 12 of the requested 20 unfilled. The ticket has no linked invoice or vendor information, so I cannot confirm that a reorder is placed, give a lead time or cost, or promise fulfillment of the remaining units."
+        },
+        {
+          "agent": "accounting",
+          "actions": [
+            "specialist_report",
+            "delegated_by_customer_service",
+            "delegated_by_boss"
+          ],
+          "tools_used": [
+            "get_price_and_margin",
+            "list_open_invoices",
+            "get_cash_balance",
+            "get_shop_date",
+            "list_payments_made",
+            "ask_colleague"
+          ],
+          "said": "The break-even ceiling is a 62.07% discount: $22.00 per hoodie, or $440.00 for 20, with zero margin. To retain a positive margin, recommend no more than 62.06% off ($22.01 each; $440.20 total; $0.20 total margin); any discounted offer requires human approval. Checking has $160.00 and there are no open invoices, but I could not verify upcoming rent, so overall cash availability against that obligation is unresolved."
+        },
+        {
+          "agent": "customer_service",
+          "actions": [
+            "specialist_report"
+          ],
+          "tools_used": [
+            "get_ticket_detail",
+            "check_stock",
+            "ask_colleague"
+          ],
+          "said": "Yale AI Club asked for 20 medium navy hoodies and a bulk discount. Only 8 size M are in stock; accounting provided the list price and cost floor, but the Boss could not provide an approval decision on the discount or a plan for the remaining 12."
+        }
+      ],
+      "delegations": [
+        {
+          "from": "customer_service",
+          "to": "accounting",
+          "result": "answered"
+        },
+        {
+          "from": "boss",
+          "to": "inventory",
+          "result": "answered"
+        },
+        {
+          "from": "boss",
+          "to": "accounting",
+          "result": "answered"
+        },
+        {
+          "from": "customer_service",
+          "to": "boss",
+          "result": "failed: UsageLimitExceeded: The next request would exceed the request_limit of 6. Consid"
+        }
+      ],
+      "refused_delegations": [
+        {
+          "from": "inventory",
+          "to": "customer_service",
+          "result": "Refused: customer_service is already in this chain (customer_service -> boss -> inventory). Answer with what you have."
+        },
+        {
+          "from": "accounting",
+          "to": "facilities",
+          "result": "Refused: delegation depth limit reached. Answer with what you have."
+        }
+      ],
+      "human_approvals": [],
+      "pending_approvals": [],
+      "blocked_reason": null
+    }
+  ]
+}
